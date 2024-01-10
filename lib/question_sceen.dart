@@ -3,9 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_app/answer_button.dart';
 import 'package:quiz_app/data/questions.dart';
 
-
 class QuestionScreen extends StatefulWidget {
-  const QuestionScreen({super.key});
+  const QuestionScreen({super.key, required this.onSelectAnswer});
+
+  final void Function(String answer) onSelectAnswer;
   @override
   State<QuestionScreen> createState() {
     return _QuestionScreenState();
@@ -13,19 +14,16 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class _QuestionScreenState extends State<QuestionScreen> {
-  var currentQuestionIndex = 0; 
+  var currentQuestionIndex = 0;
 
-  void answerQuestion() {
-  print('Before setState: $currentQuestionIndex');
-  setState(() {
-    if (currentQuestionIndex < questions.length - 1) {
+  void answerQuestion(String selectedAnswer) {
+    widget.onSelectAnswer(selectedAnswer);
+
+    setState(() {
       currentQuestionIndex++;
-    } else {
-      print('No more questions');
-    }
-  });
-  print('After setState: $currentQuestionIndex');
-}
+    });
+  }
+
   @override
   Widget build(context) {
     final currentQuestion = questions[currentQuestionIndex];
@@ -41,7 +39,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
             Text(
               currentQuestion.text,
               style: GoogleFonts.lato(
-                color: const Color.fromARGB(255, 184, 171, 215),
+                color: const Color.fromARGB(255, 165, 165, 229),
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
@@ -49,11 +47,16 @@ class _QuestionScreenState extends State<QuestionScreen> {
             ),
             const SizedBox(height: 30),
             ...currentQuestion.getShuffledAnswers().map((answer) {
-              return AnswerButton(answerText: answer, onTap: answerQuestion,);
+              return AnswerButton(
+                answerText: answer,
+                onTap: () {
+                  answerQuestion(answer); 
+                },
+              );
             })
           ],
         ),
-      ), 
-    ); 
+      ),
+    );
   }
 }

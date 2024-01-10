@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/answer_button.dart';
 import 'package:quiz_app/data/questions.dart';
 
+
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});
   @override
@@ -29,7 +30,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 30),
-            ...currentQuestion.answers.map((answer) {
+            ...currentQuestion.getShuffledAnswers().map((answer) {
               return AnswerButton(answerText: answer, onTap: () {});
             })
           ],

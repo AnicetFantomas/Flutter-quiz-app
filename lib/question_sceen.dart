@@ -22,7 +22,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
     setState(() {
       currentQuestionIndex++;
     });
-  }
+  }   
 
   @override
   Widget build(context) {

@@ -16,6 +16,7 @@ class QuestionSummary extends StatelessWidget {
                 children: [
                   Container(
                     padding: const EdgeInsets.all(10),
+                    margin: const EdgeInsets.only(bottom: 40, right: 20),
                     decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 218, 192, 192),
                       shape: BoxShape.circle,
@@ -27,8 +28,10 @@ class QuestionSummary extends StatelessWidget {
                           ),
                     ),
                   ),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           data['question'] as String,

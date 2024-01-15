@@ -1,11 +1,13 @@
   import 'package:flutter/material.dart';
 import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/questions_summary.dart';
+// import 'package:quiz_app/start_screen.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({super.key, required this.choosenAnswers});
+  const ResultScreen({super.key, required this.choosenAnswers, required this.onRestartQuiz});
 
   final List<String> choosenAnswers;
+  final VoidCallback onRestartQuiz;
 
   List<Map<String, Object>> getSummaryData() {
     final List<Map<String, Object>> summary = [];
@@ -53,7 +55,7 @@ class ResultScreen extends StatelessWidget {
                 style: OutlinedButton.styleFrom(
                   foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                 ),
-                onPressed: () {  },
+                onPressed: onRestartQuiz,
               )
             ],
           ),
